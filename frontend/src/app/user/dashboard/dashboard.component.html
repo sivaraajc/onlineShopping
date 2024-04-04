@@ -1,0 +1,100 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top bg-light-gray-3" style="width: 100%;">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div>
+        <img src="assets/logo/Screenshot from 2024-02-02 17-07-10.png" class="navbar-brand-logo" alt="">
+    </div>
+    <div class="collapse navbar-collapse" id="navbarNav" style="padding: 10px;">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link">{{user.username}}</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    product
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" *ngFor="let nav of navbarType" (click)="navigateToType(nav)">{{nav}}</a>
+                </div>
+            </li>
+        </ul>
+
+        <div class="search-box ml-auto">
+            <div class="row">
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Search products..."
+                        (input)="onSearchChange($event)">
+
+                </div>
+                <div class="col-auto">
+                    <button class="btn btn-outline-secondary" type="button" (click)="clearSearch()">Clear</button>
+                </div>
+            </div>
+        </div>
+
+
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" (click)="gotoCartPage()">Cart</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" (click)="logout()"><button class="btn btn-danger">Logout</button></a>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+
+
+<ng-container *ngIf="searchResults !== undefined && searchResults.length === 0; else withSearch">
+
+    <!-- Product details -->
+    <div class="container product-container mt-5" *ngIf="searchTerm !== undefined && searchTerm.trim() === ''">
+        <div *ngFor="let singleProduct of product" class="card product-card mt-3">
+            <img [src]="singleProduct.image" alt="{{ singleProduct.productName }}" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">{{ singleProduct.productName }}</h5>
+                <p class="card-text">{{ singleProduct.productDetails }}</p>
+                <p class="card-price">{{ singleProduct.price | currency:'INR':'symbol':'1.2-2' }}</p>
+                <div class="product-buttons">
+                    <button class="btn btn-success" (click)="gotoBuyNow(singleProduct.id)">BuyNow</button>
+                    <button class="btn btn-danger" style="margin-left: 10px;"
+                        (click)="AddToCart(singleProduct.id)">AddToCart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-3 spinner" *ngIf="searchTerm.trim() !== '' && searchResults.length === 0">
+        <p class="text-center no-results-message bg-danger text-light">No results found for "{{ searchTerm }}"</p>
+        {{ searchTerm }} - {{ searchResults.length }}
+    </div>
+
+</ng-container>
+
+
+
+
+<ng-template #withSearch>
+
+    <div class="container product-container mt-5">
+        <div *ngFor="let singleProduct of searchResults" class="card product-card">
+            <img [src]="singleProduct.image" alt="{{ singleProduct.productName }}" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">{{ singleProduct.productName }}</h5>
+                <p class="card-text">{{ singleProduct.productDetails }}</p>
+                <p class="card-price">{{ singleProduct.price | currency:'INR':'symbol':'1.2-2' }}</p>
+                <div class="product-buttons">
+                    <button class="btn btn-warning" (click)="gotoBuyNow(singleProduct.id)">Buy Now</button>
+                    <button class="btn btn-primary" style="margin-left: 10px;" (click)="AddToCart(singleProduct.id)">Add
+                        to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</ng-template>

@@ -1,0 +1,150 @@
+<div th:fragment="updateGroupCode">
+    <main>
+        <div class="container-xl px-5">
+            <div class="d-flex mt-10 mb-4 align-items-center">
+                <img class="me-4" th:src="@{/assets/img/icons/data-tables.svg}" alt="..." style="height: 48px;" />
+                <h3 class="display-6 mb-0">Update Group Code</h3>
+            </div>
+            <hr class="my-3" />
+
+            <!-- First Form and Table -->
+            <form th:action="@{/groupcode/fetchDetailsByIndentNumber}" id="updateGroupCode1"
+                th:object="${groupCodeDTO1}" method="get">
+                <div class="row g-3">
+                    <div class="col-lg-3 ya col-lg-6">
+                        <label class="form-label">Indent Number</label>
+                        <div class="input-group">
+                            <input class="form-control" type="text" id="indentNumber" name="indentNumber" />
+                            <button class="btn btn-primary" id="getDetailByIndentNumber" onclick="getindent()">Get
+                                Details</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="col-12">
+                <table id="detailsTable1" class="dataTable-table">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center;">S.NO</th>
+                            <th style="text-align: center;">Id</th>
+                            <th style="text-align: center;">Group Code</th>
+                            <th style="text-align: center;">ETIN</th>
+                            <th style="text-align: center;">Supply Type</th>
+                            <th style="text-align: center;">Domain Value</th>
+                            <th style="text-align: center;">Size</th>
+                            <th style="text-align: center;">Brand</th>
+                            <th style="text-align: center;">Package Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Table body will be dynamically populated -->
+                        <tr th:each="groupCodeDetail, rowStat : ${groupCodeDetails}">
+                            <td th:text="${rowStat.index + 1}" style="text-align: center;"></td>
+                            <td th:text="${groupCodeDetail.id}"></td>
+                            <td th:text="${groupCodeDetail.groupCode}"></td>
+                            <td th:text="${groupCodeDetail.etin}"></td>
+                            <td th:text="${groupCodeDetail.supplyType}"></td>
+                            <td th:text="${groupCodeDetail.domainValue}"></td>
+                            <td th:text="${groupCodeDetail.size}"></td>
+                            <td th:text="${groupCodeDetail.brand}"></td>
+                            <td th:text="${groupCodeDetail.packageType}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Second Form and Table -->
+            <form th:action="@{/groupcode/fetchDetailsByBardCode}" id="updateGroupCode2" th:object="${groupCodeDTO2}"
+                method="get">
+                <div class="row g-3">
+                    <div class="col-lg-3 ya col-lg-6">
+                        <label class="form-label">Bar Code</label>
+                        <div class="input-group">
+                            <input class="form-control" type="text" id="barCode" name="barCode" />
+                            <button class="btn btn-primary" id="barCodeButton" onclick="getbarcode()">Get
+                                Details</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="col-12">
+                <table id="detailsTable2" class="dataTable-table">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center;">S.NO</th>
+                            <th style="text-align: center;">Id</th>
+                            <th style="text-align: center;">Group Code</th>
+                            <th style="text-align: center;">ETIN</th>
+                            <th style="text-align: center;">Supply Type</th>
+                            <th style="text-align: center;">Domain Value</th>
+                            <th style="text-align: center;">Size</th>
+                            <th style="text-align: center;">Brand</th>
+                            <th style="text-align: center;">Package Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Table body will be dynamically populated -->
+                        <tr th:each="groupCodeDetails1, rowStat : ${groupCodeDetails1}">
+                            <td th:text="${rowStat.index + 1}" style="text-align: center;"></td>
+                            <td th:text="${groupCodeDetails1.id}"></td>
+                            <td th:text="${groupCodeDetails1.groupCode}"></td>
+                            <td th:text="${groupCodeDetails1.etin}"></td>
+                            <td th:text="${groupCodeDetails1.supplyType}"></td>
+                            <td th:text="${groupCodeDetails1.domainValue}"></td>
+                            <td th:text="${groupCodeDetails1.size}"></td>
+                            <td th:text="${groupCodeDetails1.brand}"></td>
+                            <td th:text="${groupCodeDetails1.packageType}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function getindent(event) {
+            event.preventDefault();
+
+            var xhttp = new XMLHttpRequest();
+
+            xhttp.onreadystatechange = function () {
+                var data = {
+                    indentNumber: $("#indentNumber").val()
+                };
+                var jsonData = JSON.stringify(data);
+
+
+                var indentNumber = $("#indentNumber").val();
+                if (indentNumber) {
+                    // Check if indentNumber is not empty
+                    document.getElementById("detailsTable1").innerHTML = this.responseText;
+
+                    xhttp.open("GET", "/groupcode/fetchDetailsByIndentNumber", true);
+                    xhttp.send(jsonData);
+                } else {
+                    console.error("Indent number is empty");
+                }
+            }
+        }
+        function getbarcode(event) {
+            event.preventDefault();
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                var barCode = $("#barCode").val();
+                if (barCode) {
+                    // Check if barCode is not empty
+                    document.getElementById("detailsTable2").innerHTML = this.responseText;
+                    xhttp.open("GET", "/groupcode/fetchDetailsByBardCode" + barCode, true);
+                    xhttp.send();
+                } else {
+                    console.error("Bar code is empty");
+                }
+            }
+        }
+
+
+    </script>
+</div>

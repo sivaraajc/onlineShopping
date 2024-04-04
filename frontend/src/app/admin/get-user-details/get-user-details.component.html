@@ -1,0 +1,92 @@
+
+
+<nav class="navbar navbar-expand-lg " style="width: 100%;">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div>
+        <img src="assets/logo/Screenshot from 2024-02-02 17-07-10.png" style="width: 50px; height: 50px; margin-left: 20px; border-radius: 50px;" alt="">
+    </div>
+    <div class="collapse navbar-collapse" id="navbarNav" style="padding: 10px;">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" routerLink="/admin/dashboard">HOME</a>
+              </li>
+            <li class="nav-item active">
+                <a class="nav-link">{{user.username.toUpperCase()}}</a>
+            </li>
+            
+           
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+           
+          
+        </ul>
+
+        </div>
+
+<div><button class="btn btn-secondary me-5" (click)="backToDashboard()">Back</button></div>
+
+   
+</nav>
+
+
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>S.no</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Mobile</th>
+            <th>Role</th>
+            <th>Chang Role</th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        <tr *ngFor="let us of AllUserDetails;let i=index">
+            <td>{{i+1}}</td>
+            <td>{{us.name}}</td>
+            <td>{{us.age}}</td>
+            <td>{{us.gender}}</td>
+            <td>{{us.mobile}}</td>
+            <td>{{us.roles}}</td>
+            
+                <td>
+                    <div>
+                        
+                    <label class="switch">
+                        <input type="checkbox" [checked]="us.roles.toLowerCase() === 'admin'" (change)="toggleUserRole($event, i,us.id)">
+                        <span class="slider">
+                          
+                        </span>
+                      
+                    </label>
+                    <ng-container *ngIf="us.roles.toLowerCase() === 'admin';else User">
+                        Make User
+                        
+                    </ng-container>
+                    
+                    <ng-template #User>
+                        Make Admin
+                    </ng-template>
+
+                </div>
+             
+                    
+                </td>
+                
+            
+        </tr>
+
+
+    </tbody>
+</table>
+

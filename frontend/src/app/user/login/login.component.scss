@@ -1,0 +1,10 @@
+
+.forget-password-link a {
+    color: blue;
+    cursor: pointer; /* Ensures that the link cursor is shown */
+    text-decoration: underline; /* Underlines the link */
+  }
+  
+  .forget-password-link a:hover {
+    color: darkblue; /* Change color when hovered */
+  }

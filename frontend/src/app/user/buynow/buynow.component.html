@@ -1,0 +1,108 @@
+<nav class="navbar navbar-expand-lg navbar-light  fixed-top bg-light-gray-3" style="width: 100%;">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div>
+    <img src="assets/logo/Screenshot from 2024-02-02 17-07-10.png"
+      style="width: 50px; height: 50px; margin-left: 20px; border-radius: 30px;" alt="">
+  </div>
+  <div class="collapse navbar-collapse" id="navbarNav" style="padding: 10px;">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link">{{user.username}}</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/user/dashboard">home</a>
+      </li>
+    </ul>
+
+
+  </div>
+</nav>
+
+
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Order Now</h1>
+  <div class="row">
+    <!-- Product details -->
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <!-- Display product details here -->
+          <ul>
+            <li *ngIf="carts">
+              <h4>{{ carts.productName }}</h4>
+              <h3>{{carts.productDetails}}</h3>
+              <p>Price: {{ carts.price | currency:'INR':'symbol':'1.2-2' }}</p>
+              <img src="{{carts.image}}" alt="" class="img-fluid">
+
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- Order form -->
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <form [formGroup]="orderForm">
+            <div class="form-group">
+              <label for="productCount">productCount</label>
+
+              <select name="" id="productCount" formControlName="productCount" class="form-select">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
+              <div *ngIf="orderForm.get('productCount')?.invalid && orderForm.get('productCount')?.touched"
+                class="invalid-feedback">
+                productCount is required
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="address">Address</label>
+              <textarea class="form-control" id="address" rows="3" formControlName="address"></textarea>
+              <div *ngIf="orderForm.get('address')?.invalid && orderForm.get('address')?.touched"
+                class="invalid-feedback">
+                Address is required
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="email" formControlName="email">
+              <div *ngIf="orderForm.get('email')?.errors?.['required']" class="invalid-feedback">
+                Email is required
+              </div>
+              <div *ngIf="orderForm.get('email')?.errors?.['email']" class="invalid-feedback">
+                Invalid email format
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="mobile">Mobile Number</label>
+              <input type="tel" class="form-control" id="mobile" formControlName="mobile">
+              <div *ngIf="orderForm.get('mobile')?.invalid && orderForm.get('mobile')?.touched"
+                class="invalid-feedback">
+                Mobile Number is required
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-success btn-block mt-4" [disabled]="orderForm.invalid"
+              (click)="onSubmit()">Order Now</button>
+            <button type="button" class="btn btn-danger mt-3 btn-block" (click)="goBack()">Cancel</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div><button (click)="goToProductPage()" class="btn btn-success">Back</button></div>
+
+
+
+<div class="container mt-5">
+    <h2 class="textdark" style="margin-left: 37%;">ADD CAROSUAL IMAGE</h2>
+    <div class="col-md-6 offset-md-3">
+        <form [formGroup]="registrationForm">
+
+            <div>
+                <label for="image">IMAGE:</label>
+                <input type="file" id="image" (change)="onFileChange($event)" required>
+            </div>
+            <div *ngIf="registrationForm.get('image')?.value">
+                <img [src]="registrationForm.get('image')?.value" alt="Selected Image" height="100px" width="100px">
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3" (click)="register()">Blog</button>
+            <button type="button" class="btn btn-danger ms-2 mt-3" (click)=" goToProductPage()">cancel</button>
+        </form>
+    </div>
+</div>
+
+
+
+<!-- Product details -->
+<div class="container product-container mt-5">
+    <div *ngFor="let singleProduct of  ImageResult" class="card product-card mt-3">
+        <img [src]="singleProduct.image" class="card-img-top">
+        <div class="card-body">
+
+            <div class="product-buttons">
+                <button class="btn" (click)="UpdateImage(singleProduct.id)"><i class="fa-regular fa-pen-to-square" style="color: #0ba908;font-size: 30px;"></i></button>
+                <button class="btn " style="margin-left: 10px;"
+                    (click)="DeleteImage(singleProduct.id)"><i class="fa-solid fa-trash" style="color:rgb(197, 6, 6);font-size: 30px;"></i></button>
+            </div>
+        </div>
+    </div>
+</div>

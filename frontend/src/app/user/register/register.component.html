@@ -1,0 +1,247 @@
+<nav class="navbar navbar-expand-lg fixed-top" style="width: 100%; background-color: rgb(197, 209, 209);">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div>
+        <img src="assets/logo/Screenshot from 2024-02-02 17-07-10.png"
+            style="width: 50px; height: 50px; margin-left: 20px; border-radius: 30px;" alt="">
+    </div>
+    <div class="collapse navbar-collapse" id="navbarNav" style="padding: 10px;">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#" style="margin-left: 40px; transition: all 0.3s;" routerLink="/">
+                    HOME
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" style="margin-left: 30px; transition: all 0.3s;" routerLink="/car">
+                    PRODUCTS
+                </a>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+
+            <li class="nav-item">
+                <a class="nav-link" href="#" style="margin-right: 50px; transition: all 0.3s;"
+                    routerLink="/user/register">
+                    ACCOUNT
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" style="margin-right: 30px; transition: all 0.3s;" routerLink="/user/about">
+                    ABOUT
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+
+
+<!-- Add this to src/app/register/register.component.html -->
+<!-- Add this to src/app/register/register.component.html -->
+<div class="container" style="margin-top: 100px;">
+    <h2 class="textdark" style="margin-left: 46%;">Register</h2>
+    <div class="col-md-6 offset-md-3">
+        <form [formGroup]="registrationForm" novalidate style="width: 75%;" class="mx-auto">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fas fa-user"></i> <!-- Font Awesome user icon -->
+                        </span>
+                    </div>
+                    <label for="name" class="sr-only">Username:</label>
+                    <input type="text" class="form-control" id="name" placeholder="Enter your username"
+                        formControlName="name" autocomplete="username">
+                </div>
+                <!-- Display validation error message -->
+                <div *ngIf="registrationForm.get('name')?.hasError('required') && registrationForm.get('name')?.touched"
+                    class="text-danger">
+                    Username is required.
+                </div>
+                <div *ngIf="registrationForm.get('name')?.hasError('usernameExists') && registrationForm.get('name')?.touched"
+                    class="text-danger">
+                    Username already exists.
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fas fa-lock"></i> <!-- Font Awesome lock icon -->
+                        </span>
+                    </div>
+                    <label for="password" class="sr-only">Password:</label>
+                    <input type="{{ showPassword ? 'text' : 'password' }}" class="form-control" id="password"
+                        placeholder="Enter your password" formControlName="password" autocomplete="current-password">
+
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" (click)="togglePassword()">
+                            <i class="{{ eyeIcon }}"></i> <!-- Font Awesome eye icon -->
+                        </button>
+                    </div>
+                </div>
+                <!-- Display validation error message -->
+                <div *ngIf="registrationForm.get('password')?.hasError('required') && registrationForm.get('password')?.touched"
+                    class="text-danger">Password is required.
+                </div>
+                <div *ngIf="registrationForm.get('password')?.hasError('minlength') && registrationForm.get('password')?.touched"
+                    class="text-danger">Password must be at least 8 characters.
+                </div>
+                <div *ngIf="registrationForm.get('password')?.hasError('pattern') && registrationForm.get('password')?.touched"
+                    class="text-danger">Password must contain at least one lowercase letter, one uppercase letter, one
+                    digit, and
+                    one special character.
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fas fa-mobile-alt"></i> <!-- Font Awesome mobile icon -->
+                        </span>
+                    </div>
+                    <label for="mobile" class="sr-only">Mobile:</label>
+                    <input type="text" class="form-control" id="mobile" placeholder="Enter your mobile number"
+                        formControlName="mobile">
+                </div>
+
+                <!-- Display validation error message for required -->
+                <div *ngIf="registrationForm.get('mobile')?.hasError('required') && registrationForm.get('mobile')?.touched"
+                    class="text-danger">
+                    Mobile number is required.
+                </div>
+
+                <!-- Display validation error message for pattern -->
+                <div *ngIf="registrationForm.get('mobile')?.hasError('pattern') && registrationForm.get('mobile')?.touched"
+                    class="text-danger">
+                    Mobile number must be a 10-digit number.
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fas fa-birthday-cake"></i> <!-- Font Awesome age icon -->
+                        </span>
+                    </div>
+                    <label for="age" class="sr-only">Age:</label>
+                    <input type="number" class="form-control" id="age" placeholder="Enter your age"
+                        formControlName="age">
+                </div>
+
+                <!-- Display validation error message for required -->
+                <div *ngIf="registrationForm.get('age')?.hasError('required') && registrationForm.get('age')?.touched"
+                    class="text-danger">
+                    Age is required.
+                </div>
+
+                <!-- Display validation error message for minimum age -->
+                <div *ngIf="registrationForm.get('age')?.hasError('min') && registrationForm.get('age')?.touched"
+                    class="text-danger">
+                    Age must be at least 18.
+                </div>
+            </div>
+
+            <!-- Add this to your form in src/app/register/register.component.html -->
+            <div class="mb-3">
+                <label class="form-label">Select your Gender</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gender" id="male" value="male"
+                        formControlName="gender">
+                    <label class="form-check-label" for="male">
+                        <span class="icon"><i class="fas fa-mars"></i></span> Male
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gender" id="female" value="female"
+                        formControlName="gender">
+                    <label class="form-check-label" for="female">
+                        <span class="icon"><i class="fas fa-venus"></i></span> Female
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fas fa-envelope"></i> <!-- Font Awesome envelope icon -->
+                        </span>
+                    </div>
+                    <label for="email" class="sr-only">Email:</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter your email"
+                        formControlName="email">
+                </div>
+                <!-- Display validation error message -->
+                <div *ngIf="registrationForm.get('email')?.hasError('required') && registrationForm.get('email')?.touched"
+                    class="text-danger">
+                    Email is required.
+                </div>
+                <div *ngIf="registrationForm.get('email')?.hasError('email') && registrationForm.get('email')?.touched"
+                    class="text-danger">
+                    Please enter a valid email address.
+                </div>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="verificationCheckbox"
+                    formControlName="verificationCheckbox">
+                <label class="form-check-label" for="verificationCheckbox">
+                    I agree to verify my email.
+                </label>
+            </div>
+
+            <button type="button" class="btn btn-warning mt-3 me-3" (click)="generateAndSendVerificationString()"
+                [disabled]="verificationRequested || !registrationForm.valid || !registrationForm.get('verificationCheckbox')?.value">
+                Send Otp
+            </button>
+
+            <div *ngIf="verificationRequested" class="form-group">
+                <label for="verificationCode">Enter Verification Code:</label>
+                <input type="text" class="form-control" id="verificationCode" placeholder="Enter verification code"
+                    formControlName="verificationCode">
+            </div>
+
+            <button type="button" class="btn btn-success mt-3" (click)="verify()"
+                [disabled]="!verificationRequested || registrationForm.get('verificationCode')?.value !== GeneratedRandomString">
+                Verify
+            </button>
+
+            <div *ngIf="verificationSuccess" class="alert alert-success mt-3" role="alert">
+                Verification successful!
+            </div>
+
+            
+
+
+
+           
+
+
+            Already have an account?<a href="#" routerLink="/user/login" class="text-primary">Login</a><br>
+
+            <!-- ... other form controls with validation -->
+          <!-- ... other form controls with validation -->
+            <button type="submit" class="btn btn-primary mt-3"
+                [disabled]="!verificationSuccess || !registrationForm.valid" (click)="register()">
+                <i class="fas fa-check"></i> Register
+            </button>
+
+            <button type="button" class="btn btn-danger mt-3" (click)="cancel()" style="margin-left: 20px;">
+                <i class="fas fa-times"></i> Cancel
+            </button>
+
+        </form>
+    </div>
+</div>

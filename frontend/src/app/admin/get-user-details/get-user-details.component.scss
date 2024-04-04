@@ -1,0 +1,140 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #0a1f33;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    box-shadow: 0 2px 4px rgba(161, 64, 64, 0.1);
+    background-color:cadetblue;
+}
+
+.navbar-toggler-icon {
+    background-color: #007bff;
+}
+
+.navbar-nav .nav-link {
+    color: #343a40;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ffffff;
+}
+
+.navbar-brand img {
+    border-radius: 50%;
+}
+
+.container.product-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.card.product-card {
+    width: 300px;
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.card.product-card:hover {
+    transform: scale(1.05);
+}
+
+.card-img-top {
+    max-height: 200px;
+    object-fit: cover;
+}
+
+.card-body {
+    text-align: center;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    color: #6c757d;
+}
+
+.card-price {
+    color: #0a6d21;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.product-buttons button {
+    margin-top: 10px;
+}
+
+.btn-success {
+    background-color: #11af26ab;
+    border-color: #11af26ab;
+}
+
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #f321d0;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #f321d0;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+
+

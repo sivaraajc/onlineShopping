@@ -1,0 +1,22 @@
+<div><button (click)="goToProductPage()" class="btn btn-success">Back</button></div>
+
+
+
+<div class="container mt-5">
+    <h2 class="textdark" style="margin-left: 37%;">UPDATE CAROSUAL IMAGE</h2>
+    <div class="col-md-6 offset-md-3">
+        <form [formGroup]="registrationForm">
+
+            <div>
+                <label for="image">IMAGE:</label>
+                <input type="file" id="image" (change)="onFileChange($event)" required>
+            </div>
+            <div *ngIf="registrationForm.get('image')?.value">
+                <img [src]="registrationForm.get('image')?.value" alt="Selected Image" height="100px" width="100px">
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3" (click)="register()">Blog</button>
+            <button type="button" class="btn btn-danger ms-2 mt-3" (click)=" goToProductPage()">cancel</button>
+        </form>
+    </div>
+</div>

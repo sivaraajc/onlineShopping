@@ -1,0 +1,133 @@
+$color:(
+
+"red":red,
+"pink":pink,
+"green":green,
+"yellow":yellow,
+"blue":blue,
+"black":black,
+"white":white,
+"gray":gray,
+"orange":orange
+
+);
+
+
+@each $key,$val in $color{
+
+    .text-#{$key}{
+        color:$val;
+    }
+
+    .bg-#{$key}{
+        background-color: $val;
+    }
+
+    .btn-#{$key}{
+        background-color: $val;
+        padding: 0px 4px 0px 4px;
+        border-radius: 5px;
+
+    }
+    .btn-text-#{$key}{
+        color:$val;
+    }
+
+
+    @for $i from 1 through 6 {
+        .text-light-#{$key}-#{$i}{
+            color: lighten($val, $i *10);
+        }
+        .bg-light-#{$key}-#{$i}{
+            background-color: lighten($val ,$i *10);
+        }
+    }
+
+    @for $i from 1 through 3 {
+        .text-dark-#{$key}-#{$i}{
+            color: darken($val, $i *10);
+        }
+        .bg-dark-#{$key}-#{$i}{
+            background-color: darken($val ,$i *5);
+        }
+    }
+
+}
+
+
+/* styles.css */
+
+.navbar-brand-logo {
+    width: 50px;
+    height: 50px;
+    margin-left: 20px;
+    border-radius: 50%;
+}
+
+.back-to-top {
+    margin-top: 20px;
+    margin-left: 90%;
+    position: fixed;
+}
+
+.product-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.product-card {
+    width: 300px;
+    margin-bottom: 20px;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 200px;
+    object-fit: cover; /* Ensure the image covers the entire card */
+    border-radius: 10px;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.card-price {
+    font-size: 1.25rem;
+    color: #007bff;
+}
+
+.product-buttons {
+    margin-top: 10px;
+}
+
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+
+.red-snackbar {
+    --mdc-snackbar-container-color: white;
+    --mat-snack-bar-button-color: black;
+    --mdc-snackbar-supporting-text-color: red;
+    padding-top: 100px;
+}
+
+
+.green-snackbar {
+    --mdc-snackbar-container-color: white;
+    --mat-snack-bar-button-color: black;
+    --mdc-snackbar-supporting-text-color: green;
+    padding-top: 100px;
+}
+  

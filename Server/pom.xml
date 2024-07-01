@@ -114,6 +114,7 @@
 			</plugin>
 		
 		</plugins>
+		<finalName>Deploy</finalName>
 	</build>
 
 </project>
